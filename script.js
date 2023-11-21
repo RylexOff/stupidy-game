@@ -32,7 +32,7 @@ function showLetter() {
             letterDisplay.textContent = '';
             showLetter();
         }
-    }, 1000);
+    }, 2000);
 }
 
 document.addEventListener('keydown', (event) => {
