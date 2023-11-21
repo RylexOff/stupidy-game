@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="game-container">
-        <div class="score-container">
-            <p>Score: <span id="score">0</span></p>
+    <div class="container">
+        <h1 class="title">Jeu de Reflexe</h1>
+        <p class="score-display">Score: <span id="score">0</span></p>
+        <div class="game-area">
+            <p id="letter-display"></p>
         </div>
-        <div class="game-content">
-            <p id="display">A</p>
-        </div>
-        <button id="replay">Recommencer</button>
+        <p class="game-over-display">Game Over</p>
+        <button class="restart-button">Recommencer</button>
     </div>
     <script src="script.js"></script>
 </body>
