@@ -1,2 +1,2 @@
 # stupidy-game
-prout
+I try IA 
