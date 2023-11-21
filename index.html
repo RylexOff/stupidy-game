@@ -98,13 +98,13 @@
             lettersToAdd++;
           }
 
-          // Ajoutez la classe "explosion" à chaque lettre individuelle
+          // Ajoutez la classe "explosion" à toutes les lettres
           var letterElements = document.getElementById("letters").querySelectorAll("h1");
           for (var i = 0; i < letterElements.length; i++) {
             letterElements[i].classList.add("explosion");
           }
 
-          // Générez les lettres suivantes
+          // Générez les lettres suivantes après un court délai
           setTimeout(function() {
             for (var i = 0; i < letterElements.length; i++) {
               letterElements[i].classList.remove("explosion"); // Supprimer la classe d'explosion
