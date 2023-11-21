@@ -13,6 +13,29 @@
     #score {
       margin-top: 20px;
     }
+
+    #letters {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+      font-size: 36px;
+    }
+
+    h1 {
+      margin: 0 10px;
+    }
+
+    #recommencer {
+      display: none;
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
  </style>
 </head>
 <body>
@@ -20,7 +43,7 @@
  <p>Appuyez sur les touches correspondantes aux lettres affichées pour gagner des points. Votre score sera multiplié par le nombre de secondes restantes.</p>
  <h2 id="score">Score: 0</h2>
  <div id="letters"></div>
- <button id="recommencer" style="display: none;">Recommencer</button>
+ <button id="recommencer">Recommencer</button>
  <script>
     var score = 0;
     var timer;
@@ -47,7 +70,13 @@
           score += seconds * 100;
           document.getElementById("score").innerHTML = "Score: " + score;
           level++;
-          seconds = 2; // Reset time for next level
+
+          if (seconds > 0.5) {
+            seconds -= 0.1;
+          } else {
+            seconds = 2;
+          }
+
           generateLetters();
         }
       } else {
@@ -63,18 +92,24 @@
     }
 
     function restart() {
-      location.reload();
+      score = 0;
+      level = 1;
+      seconds = 2;
+      generateLetters();
+      document.getElementById("score").innerHTML = "Score: 0";
+      document.getElementById("recommencer").style.display = "none";
+      startGame();
     }
 
     function startGame() {
       generateLetters();
       document.onkeypress = checkLetter;
       timer = setInterval(function () {
-        seconds--;
-        if (seconds < 0) {
+        seconds -= 0.1;
+        if (seconds <= 0) {
           gameOver();
         }
-      }, 1000);
+      }, 100);
     }
 
     document.getElementById("recommencer").onclick = restart;
