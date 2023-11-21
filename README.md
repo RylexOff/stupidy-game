@@ -1,2 +1,2 @@
 # stupidy-game
-I try IA 
+I try IA fck u
