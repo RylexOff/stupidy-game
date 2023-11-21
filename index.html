@@ -51,11 +51,12 @@
     var currentLetterIndex = 0;
     var seconds = 2;
     var level = 1;
+    var lettersToAdd = 1;
 
     function generateLetters() {
       document.getElementById("letters").innerHTML = "";
       letters = [];
-      for (var i = 0; i < level; i++) {
+      for (var i = 0; i < lettersToAdd; i++) {
         var letter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
         letters.push(letter);
         document.getElementById("letters").innerHTML += "<h1>" + letter + "</h1>";
@@ -75,6 +76,7 @@
             seconds -= 0.1;
           } else {
             seconds = 2;
+            lettersToAdd++;
           }
 
           generateLetters();
@@ -95,6 +97,7 @@
       score = 0;
       level = 1;
       seconds = 2;
+      lettersToAdd = 1;
       generateLetters();
       document.getElementById("score").innerHTML = "Score: 0";
       document.getElementById("recommencer").style.display = "none";
