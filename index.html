@@ -35,11 +35,6 @@
       cursor: pointer;
       margin-top: 20px;
     }
-
-    #startButton {
-      position: absolute;
-      top: -100px;
-    }
  </style>
 </head>
 <body>
@@ -49,7 +44,6 @@
  <div id="letters"></div>
  <button id="recommencer" style="display: none;">Recommencer</button>
  <button id="demarrer" onclick="startGame()">Démarrer</button>
- <button id="startButton" onclick="openKeyboard()" style="display: none;"></button>
  <script>
     var score = 0;
     var timer;
@@ -124,16 +118,11 @@
             gameOver();
           }
         }, 100);
-        openKeyboard();
       }
     }
 
-    function openKeyboard() {
-      var startButton = document.getElementById("startButton");
-      startButton.focus();
-    }
-
-    document.getElementById("recommencer").onclick = restart;
+    // Définir automatiquement le focus sur le bouton "Démarrer" au chargement de la page pour ouvrir le clavier
+    document.getElementById("demarrer").focus();
  </script>
 </body>
 </html>
