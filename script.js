@@ -1,30 +1,49 @@
-const display = document.getElementById('display');
+const letterDisplay = document.getElementById('letter-display');
 const scoreDisplay = document.getElementById('score');
-const replayButton = document.getElementById('replay');
+const gameOverDisplay = document.querySelector('.game-over-display');
+const restartButton = document.querySelector('.restart-button');
+
 let score = 0;
+let gameOver = false;
 
-const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-let randomLetter = letters[Math.floor(Math.random() * letters.length)];
-display.textContent = randomLetter;
-
-document.body.onkeyup = function(e) {
-    if(e.key === randomLetter) {
-        score++;
-        scoreDisplay.textContent = score;
-        randomLetter = letters[Math.floor(Math.random() * letters.length)];
-        display.textContent = randomLetter;
-    } else {
-        alert('Perdu! Votre score était de ' + score + '.');
-        score = 0;
-        scoreDisplay.textContent = score;
-        randomLetter = letters[Math.floor(Math.random() * letters.length)];
-        display.textContent = randomLetter;
-    }
-};
-
-replayButton.onclick = function() {
-    score = 0;
+function updateScoreDisplay() {
     scoreDisplay.textContent = score;
-    randomLetter = letters[Math.floor(Math.random() * letters.length)];
-    display.textContent = randomLetter;
-};
+}
+
+function startGame() {
+    gameOver = false;
+    score = 0;
+    updateScoreDisplay();
+    gameOverDisplay.style.display = 'none';
+    restartButton.style.display = 'none';
+}
+
+function gameOver() {
+    gameOver = true;
+    gameOverDisplay.style.display = 'block';
+    restartButton.style.display = 'block';
+}
+
+function showLetter() {
+    const randomLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+    letterDisplay.textContent = randomLetter;
+    setTimeout(() => {
+        if (!gameOver) {
+            letterDisplay.textContent = '';
+            showLetter();
+        }
+    }, 1000);
+}
+
+document.addEventListener('keydown', (event) => {
+    if (!gameOver && event.key === letterDisplay.textContent) {
+        score++;
+        updateScoreDisplay();
+        showLetter();
+    } else if (gameOver && event.key === 'r') {
+        startGame();
+    }
+});
+
+startGame();
+showLetter();
