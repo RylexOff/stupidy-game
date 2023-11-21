@@ -92,17 +92,25 @@
           level++;
 
           if (seconds > 1.0) {
-            seconds -= 0.1;
+            seconds -= 0.2; // Réduire le délai de 0.2 secondes à chaque niveau
           } else {
             seconds = 2.5; // Réinitialiser à 2.5 secondes
             lettersToAdd++;
           }
 
-          // Ajoutez la classe "explosion" à la lettre actuelle
-          document.getElementById("letters").children[currentLetterIndex - 1].classList.add("explosion");
+          // Ajoutez la classe "explosion" à chaque lettre individuelle
+          var letterElements = document.getElementById("letters").querySelectorAll("h1");
+          for (var i = 0; i < letterElements.length; i++) {
+            letterElements[i].classList.add("explosion");
+          }
 
-          // Générez la lettre suivante
-          setTimeout(generateLetters, 500); // Attendre 500 millisecondes avant de générer la lettre suivante
+          // Générez les lettres suivantes
+          setTimeout(function() {
+            for (var i = 0; i < letterElements.length; i++) {
+              letterElements[i].classList.remove("explosion"); // Supprimer la classe d'explosion
+            }
+            generateLetters();
+          }, 500); // Attendre 500 millisecondes avant de générer les lettres suivantes
         }
       } else {
         gameOver();
