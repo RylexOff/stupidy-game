@@ -36,6 +36,24 @@
       cursor: pointer;
       margin-top: 20px;
     }
+
+    /* Style pour l'effet d'explosion */
+    .explosion {
+      animation-name: puff;
+      animation-duration: 0.5s;
+      animation-timing-function: ease-out;
+    }
+
+    @keyframes puff {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
  </style>
 </head>
 <body>
@@ -80,7 +98,11 @@
             lettersToAdd++;
           }
 
-          generateLetters();
+          // Ajoutez la classe "explosion" à la lettre actuelle
+          document.getElementById("letters").children[currentLetterIndex - 1].classList.add("explosion");
+
+          // Générez la lettre suivante
+          setTimeout(generateLetters, 500); // Attendre 500 millisecondes avant de générer la lettre suivante
         }
       } else {
         gameOver();
