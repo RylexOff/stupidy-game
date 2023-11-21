@@ -17,32 +17,38 @@
 </head>
 <body>
  <h1>Jeu de Reflexe</h1>
- <p>Appuyez sur la touche correspondante à la lettre affichée pour gagner des points. Votre score sera multiplié par le nombre de secondes restantes.</p>
+ <p>Appuyez sur les touches correspondantes aux lettres affichées pour gagner des points. Votre score sera multiplié par le nombre de secondes restantes.</p>
  <h2 id="score">Score: 0</h2>
+ <div id="letters"></div>
  <button id="recommencer" style="display: none;">Recommencer</button>
  <script>
     var score = 0;
     var timer;
-    var letter;
+    var letters = [];
+    var currentLetterIndex = 0;
     var seconds = 2;
+    var level = 1;
 
-    function generateLetter() {
-      letter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
-      document.body.innerHTML += "<h1 id='letter'>" + letter + "</h1>";
-      document.onkeypress = checkLetter;
+    function generateLetters() {
+      document.getElementById("letters").innerHTML = "";
+      letters = [];
+      for (var i = 0; i < level; i++) {
+        var letter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+        letters.push(letter);
+        document.getElementById("letters").innerHTML += "<h1>" + letter + "</h1>";
+      }
+      currentLetterIndex = 0;
     }
 
     function checkLetter(event) {
-      var key = event.key;
-      if (key === letter) {
-        clearTimeout(timer);
-        seconds--;
-        if (seconds < 0) {
-          gameOver();
-        } else {
+      if (event.key.toUpperCase() === letters[currentLetterIndex]) {
+        currentLetterIndex++;
+        if (currentLetterIndex >= letters.length) {
           score += seconds * 100;
           document.getElementById("score").innerHTML = "Score: " + score;
-          generateLetter();
+          level++;
+          seconds = 2; // Reset time for next level
+          generateLetters();
         }
       } else {
         gameOver();
@@ -51,7 +57,7 @@
 
     function gameOver() {
       clearTimeout(timer);
-      document.getElementById("letter").innerHTML = "Game Over";
+      document.getElementById("letters").innerHTML = "<h1>Game Over</h1><p>Score final: " + score + "</p>";
       document.getElementById("recommencer").style.display = "inline-block";
       document.onkeypress = null;
     }
@@ -61,7 +67,8 @@
     }
 
     function startGame() {
-      generateLetter();
+      generateLetters();
+      document.onkeypress = checkLetter;
       timer = setInterval(function () {
         seconds--;
         if (seconds < 0) {
