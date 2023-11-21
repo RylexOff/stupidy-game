@@ -1,21 +1,77 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeu de Reflexe</title>
-    <link rel="stylesheet" href="styles.css">
+ <title>Jeu de Reflexe</title>
+ <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    #score {
+      margin-top: 20px;
+    }
+ </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="title">Jeu de Reflexe</h1>
-        <p class="score-display">Score: <span id="score">0</span></p>
-        <div class="game-area">
-            <p id="letter-display"></p>
-        </div>
-        <p class="game-over-display">Game Over</p>
-        <button class="restart-button">Recommencer</button>
-    </div>
-    <script src="script.js"></script>
+ <h1>Jeu de Reflexe</h1>
+ <p>Appuyez sur la touche correspondante à la lettre affichée pour gagner des points. Votre score sera multiplié par le nombre de secondes restantes.</p>
+ <h2 id="score">Score: 0</h2>
+ <button id="recommencer" style="display: none;">Recommencer</button>
+ <script>
+    var score = 0;
+    var timer;
+    var letter;
+    var seconds = 2;
+
+    function generateLetter() {
+      letter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+      document.body.innerHTML += "<h1 id='letter'>" + letter + "</h1>";
+      document.onkeypress = checkLetter;
+    }
+
+    function checkLetter(event) {
+      var key = event.key;
+      if (key === letter) {
+        clearTimeout(timer);
+        seconds--;
+        if (seconds < 0) {
+          gameOver();
+        } else {
+          score += seconds * 100;
+          document.getElementById("score").innerHTML = "Score: " + score;
+          generateLetter();
+        }
+      } else {
+        gameOver();
+      }
+    }
+
+    function gameOver() {
+      clearTimeout(timer);
+      document.getElementById("letter").innerHTML = "Game Over";
+      document.getElementById("recommencer").style.display = "inline-block";
+      document.onkeypress = null;
+    }
+
+    function restart() {
+      location.reload();
+    }
+
+    function startGame() {
+      generateLetter();
+      timer = setInterval(function () {
+        seconds--;
+        if (seconds < 0) {
+          gameOver();
+        }
+      }, 1000);
+    }
+
+    document.getElementById("recommencer").onclick = restart;
+    startGame();
+ </script>
 </body>
 </html>
