@@ -49,7 +49,7 @@
     var timer;
     var letters = [];
     var currentLetterIndex = 0;
-    var seconds = 3; // Début avec 3 secondes
+    var seconds = 2.5; // Début avec 2.5 secondes
     var level = 1;
     var lettersToAdd = 1;
 
@@ -73,10 +73,10 @@
           document.getElementById("score").innerHTML = "Score: " + score;
           level++;
 
-          if (seconds > 1) {
+          if (seconds > 1.0) {
             seconds -= 0.1;
           } else {
-            seconds = 3; // Réinitialiser à 3 secondes
+            seconds = 2.5; // Réinitialiser à 2.5 secondes
             lettersToAdd++;
           }
 
@@ -97,7 +97,7 @@
     function restart() {
       score = 0;
       level = 1;
-      seconds = 3;
+      seconds = 2.5;
       lettersToAdd = 1;
       generateLetters();
       document.getElementById("score").innerHTML = "Score: 0";
@@ -109,10 +109,10 @@
       generateLetters();
       document.onkeypress = checkLetter;
       timer = setInterval(function () {
-        if (seconds > 1) {
+        if (seconds > 1.0) {
           seconds -= 0.1;
         } else {
-          seconds = 3;
+          seconds = 2.5;
           lettersToAdd++;
         }
       }, 1000); // Réduire le délai toutes les secondes
