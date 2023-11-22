@@ -119,7 +119,7 @@
 
     function gameOver() {
       clearTimeout(timer);
-      document.getElementById("letters").innerHTML = "<h1>Game Over</h1><p>Score final: " + score + "</p>";
+      document.getElementById("letters").innerHTML = "<h1>Game Over</h1></br><p>Score final: " + score + "</p>";
       document.getElementById("recommencer").style.display = "inline-block";
       document.onkeypress = null;
     }
