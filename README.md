@@ -4,7 +4,7 @@ Bienvenue dans le projet "Stupidy-game" ! Ce jeu vous mettra au défi de réagir
 
 ## Présentation
 
-Ce projet a été créé pour explorer les capacités d'une intelligence artificielle (IA) en matière de création de jeux. L'idée de base était de voir quel genre de jeu une IA pourrait créer sans aucune indication spécifique, et le résultat est étonnamment amusant.
+Ce projet a été créé pour explorer les capacités d'une intelligence artificielle (IA) en matière de création de jeux. L'idée de base était de voir quel genre de jeu une IA pourrait créer sans aucune indication spécifique, et le résultat est étonnamment relativement amusant.
 
 ## Fonctionnalités
 
