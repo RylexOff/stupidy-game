@@ -5,3 +5,5 @@ console.log("hello world") // 2 eme car c'est jamais trop
 function main (){
 return null ; 
 }
+main()
+//re !
